@@ -1,0 +1,50 @@
+﻿@page
+@model SWQA.Pages.BugReport.IndexModel
+@{
+}
+
+<div class="container-fluid px-4">
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
+        <div>
+            <h1 class="mt-0">Bug Reports</h1>
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item active">Here you can find the list of bugs logged & make changes on these logs.</li>
+            </ol>
+        </div>
+        <div>
+            <a asp-page="/BugReport/Create" class="btn btn-primary shadow-sm">+ Add a new Bug</a>
+        </div>
+    </div>
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Bug ID</th>
+            <th scope="col">Error Code</th>
+            <th scope="col">Bug Description</th>
+            <th scope="col">Date Reported</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Listele)
+        {
+            <tr>
+                <td>@item.BugId</td>
+                <td>@item.ErrorCode</td>
+                <td>@item.BugDescription</td>
+                <td>@item.DateReported</td>
+                <td>
+                    <a class="btn btn-outline-success btn-sm" href="/BugReport/Edit?id=@item.BugId">Edit</a>
+
+                    <form method="post" asp-page="/BugReport/Delete" asp-route-id="@item.BugId" style="display:inline";>
+                        <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('This log will be permanently deleted. Are you sure?');">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

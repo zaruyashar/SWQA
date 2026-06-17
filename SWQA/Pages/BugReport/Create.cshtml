@@ -1,0 +1,54 @@
+﻿@page
+@model SWQA.Pages.BugReport.CreateModel
+@{
+}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Create A Bug Report</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">
+            Log a new bug here.
+        </li>
+    </ol>
+</div>
+
+@if (Model.errorMessage.Length > 0)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>@Model.errorMessage</strong>
+        <button type="button" class="btn-close" data-bs-dismis="alert" aria-label="close"></button>
+    </div>
+}
+
+
+<form method="Post">
+    <div class="row mb-3">
+        <label class="col-sm-3">Error Code</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="errorcode" value="@Model.bugreport.ErrorCode" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3">Bug Description</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="bugdescription" value="@Model.bugreport.BugDescription" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3">Date Reported</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="datereported" value="@Model.bugreport.DateReported" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="offset-sm-3 col-sm-3 d-grid">
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
+        </div>
+        <div class="col-sm-3 d-grid">
+            <a class="btn btn-outline-danger" href="/" role="button">Cancel</a>
+        </div>
+    </div>
+</form>
