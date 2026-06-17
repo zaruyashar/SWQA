@@ -1,0 +1,80 @@
+﻿@page
+@model SWQA.Pages.SearchModel
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Search Results</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Displaying records matching "<b>@Model.q</b>".</li>
+    </ol>
+
+    @if (Model.BugResults.Count == 0 && Model.EnvResults.Count == 0 && !string.IsNullOrEmpty(Model.q))
+    {
+        <div class="alert alert-info">No results found matching your query.</div>
+    }
+
+
+    @if (Model.BugResults.Count > 0)
+    {
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-danger text-white">
+                <i class="fas fa-bug me-1"></i> Bug Reports (@Model.BugResults.Count found)
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Bug ID</th>
+                            <th>Error Code</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var bug in Model.BugResults)
+                        {
+                            <tr>
+                                <td>@bug.BugId</td>
+                                <td>@Model.HighlightText(bug.ErrorCode, Model.q)</td>
+                                <td>@Model.HighlightText(bug.BugDescription, Model.q)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+
+    @if (Model.EnvResults.Count > 0)
+    {
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <i class="fas fa-server me-1"></i> Test Environments (@Model.EnvResults.Count found)
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Table ID</th>
+                            <th>Server IP</th>
+                            <th>Operating System</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var env in Model.EnvResults)
+                        {
+                            <tr>
+                                <td>@env.TableId</td>
+                                <td>@Model.HighlightText(env.ServerIp, Model.q)</td>
+                                <td>@Model.HighlightText(env.OperatingSystem, Model.q)</td>
+                                <td>@(env.IsActive ? "Active" : "Inactive")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
