@@ -19,6 +19,7 @@ namespace SWQA.Pages.BugReport
 
                 connection.Open();
                 string sql = "DELETE FROM BugReport WHERE BugId = @BugId";
+
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     command.Parameters.AddWithValue("@BugId", ID);

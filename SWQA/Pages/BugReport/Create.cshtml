@@ -16,30 +16,30 @@
 {
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <strong>@Model.errorMessage</strong>
-        <button type="button" class="btn-close" data-bs-dismis="alert" aria-label="close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
     </div>
 }
 
 
-<form method="Post">
+<form method="post">
     <div class="row mb-3">
         <label class="col-sm-3">Error Code</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="errorcode" value="@Model.bugreport.ErrorCode" />
+            <input type="text" class="form-control" name="ErrorCode" value="@Model.bugreport.ErrorCode" />
         </div>
     </div>
 
     <div class="row mb-3">
         <label class="col-sm-3">Bug Description</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="bugdescription" value="@Model.bugreport.BugDescription" />
+            <input type="text" class="form-control" name="BugDescription" value="@Model.bugreport.BugDescription" />
         </div>
     </div>
 
     <div class="row mb-3">
         <label class="col-sm-3">Date Reported</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="datereported" value="@Model.bugreport.DateReported" />
+            <input type="date" class="form-control" name="DateReported" value="@Model.bugreport.DateReported.ToString("yyyy-MM-dd")" />
         </div>
     </div>
 
@@ -47,8 +47,9 @@
         <div class="offset-sm-3 col-sm-3 d-grid">
             <button type="submit" class="btn btn-outline-primary">Submit</button>
         </div>
+
         <div class="col-sm-3 d-grid">
-            <a class="btn btn-outline-danger" href="/" role="button">Cancel</a>
+            <a class="btn btn-outline-danger" href="/BugReport/Index" role="button">Cancel</a>
         </div>
     </div>
 </form>

@@ -13,6 +13,7 @@ namespace SWQA.Pages.BugReport
 
         public void OnGet()
         {
+            bugreport.DateReported = DateTime.Now;
         }
 
         public void OnPost()
