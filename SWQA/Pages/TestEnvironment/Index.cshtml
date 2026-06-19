@@ -2,4 +2,49 @@
 @model SWQA.Pages.TestEnvironment.IndexModel
 @{
 }
-<br />
+
+<div class="container-fluid px-4">
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
+        <div>
+            <h1 class="mt-0">Test Environments</h1>
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item active">Here you can see details on test details & update them as needed.</li>
+            </ol>
+        </div>
+        <div>
+            <a asp-page="/TestEnvironment/Create" class="btn btn-primary shadow-sm">+ Create a New Test Log</a>
+        </div>
+    </div>
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Table ID</th>
+            <th scope="col">Server IP</th>
+            <th scope="col">Operating System</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Listele)
+        {
+            <tr>
+                <td>@item.TableId</td>
+                <td>@item.ServerIp</td>
+                <td>@item.OperatingSystem</td>
+                <td>@item.IsActive</td>
+                <td>
+                    <a class="btn btn-outline-success btn-sm" href="/TestEnvironment/Edit?id=@item.TableId">Edit</a>
+
+                    <form method="post" asp-page="/TestEnvironment/Delete" asp-route-id="@item.TableId" style="display:inline" ;>
+                        <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('This test log will be permanently deleted. Are you sure?');">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
