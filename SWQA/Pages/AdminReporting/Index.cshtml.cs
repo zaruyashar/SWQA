@@ -78,7 +78,8 @@ namespace SWQA.Pages.AdminReporting
             using (SqlCommand cmd = new SqlCommand(sql, connection))
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                while (reader.Read()) list.Add(new FrequentErrorRecord { ErrorCode = reader.GetString(0), Count = reader.GetInt32(1) });
+                while (reader.Read()) list.Add(new FrequentErrorRecord { ErrorCode = reader.GetString(0), Count = reader.GetInt32(1) 
+                });
             }
             return list;
         }
@@ -91,7 +92,12 @@ namespace SWQA.Pages.AdminReporting
             using (SqlCommand cmd = new SqlCommand(sql, connection))
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                while (reader.Read()) list.Add(new SWQA.Pages.BugReport.BugReport { BugId = reader.GetInt32(0), ErrorCode = reader.GetString(1), BugDescription = reader.GetString(2), DateReported = reader.GetDateTime(3) });
+                while (reader.Read()) list.Add(new SWQA.Pages.BugReport.BugReport { 
+                    BugId = reader.GetInt32(0), 
+                    ErrorCode = reader.GetString(1), 
+                    BugDescription = reader.GetString(2), 
+                    DateReported = reader.GetDateTime(3) 
+                });
             }
             return list;
         }
@@ -104,7 +110,12 @@ namespace SWQA.Pages.AdminReporting
             using (SqlCommand cmd = new SqlCommand(sql, connection))
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                while (reader.Read()) list.Add(new SWQA.Pages.BugReport.BugReport { BugId = reader.GetInt32(0), ErrorCode = reader.GetString(1), BugDescription = reader.GetString(2), DateReported = reader.GetDateTime(3) });
+                while (reader.Read()) list.Add(new SWQA.Pages.BugReport.BugReport { 
+                    BugId = reader.GetInt32(0), 
+                    ErrorCode = reader.GetString(1), 
+                    BugDescription = reader.GetString(2), 
+                    DateReported = reader.GetDateTime(3) 
+                });
             }
             return list;
         }
@@ -117,7 +128,12 @@ namespace SWQA.Pages.AdminReporting
             using (SqlCommand cmd = new SqlCommand(sql, connection))
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                while (reader.Read()) list.Add(new SWQA.Pages.TestEnvironment.TestEnvironment { TableId = reader.GetInt32(0), ServerIp = reader.GetString(1), OperatingSystem = reader.GetString(2), IsActive = reader.GetBoolean(3) });
+                while (reader.Read()) list.Add(new SWQA.Pages.TestEnvironment.TestEnvironment { 
+                    TableId = reader.GetInt32(0), 
+                    ServerIp = reader.GetString(1), 
+                    OperatingSystem = reader.GetString(2), 
+                    IsActive = reader.GetBoolean(3) 
+                });
             }
             return list;
         }
@@ -130,7 +146,10 @@ namespace SWQA.Pages.AdminReporting
             using (SqlCommand cmd = new SqlCommand(sql, connection))
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                while (reader.Read()) list.Add(new OsDistributionRecord { OperatingSystem = reader.GetString(0), Count = reader.GetInt32(1) });
+                while (reader.Read()) list.Add(new OsDistributionRecord { 
+                    OperatingSystem = reader.GetString(0), 
+                    Count = reader.GetInt32(1) 
+                });
             }
             return list;
         }
@@ -143,14 +162,26 @@ namespace SWQA.Pages.AdminReporting
             using (SqlCommand cmd = new SqlCommand(sql, connection))
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                while (reader.Read()) list.Add(new BugsByDateRecord { ReportDate = reader.GetDateTime(0).ToString("yyyy-MM-dd"), Count = reader.GetInt32(1) });
+                while (reader.Read()) list.Add(new BugsByDateRecord { 
+                    ReportDate = reader.GetDateTime(0).ToString("yyyy-MM-dd"), 
+                    Count = reader.GetInt32(1) 
+                });
             }
             return list;
         }
     }
 
     // --- XML serialization constructors ---
-    public class FrequentErrorRecord { public string ErrorCode { get; set; } public int Count { get; set; } }
-    public class OsDistributionRecord { public string OperatingSystem { get; set; } public int Count { get; set; } }
-    public class BugsByDateRecord { public string ReportDate { get; set; } public int Count { get; set; } }
+    public class FrequentErrorRecord { 
+        public string ErrorCode { get; set; } 
+        public int Count { get; set; } 
+    }
+    public class OsDistributionRecord { 
+        public string OperatingSystem { get; set; } 
+        public int Count { get; set; } 
+    }
+    public class BugsByDateRecord { 
+        public string ReportDate { get; set; } 
+        public int Count { get; set; } 
+    }
 }
