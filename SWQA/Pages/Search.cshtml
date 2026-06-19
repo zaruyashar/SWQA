@@ -10,7 +10,11 @@
         <li class="breadcrumb-item active">Displaying records matching "<b>@Model.q</b>".</li>
     </ol>
 
-    @if (Model.BugResults.Count == 0 && Model.EnvResults.Count == 0 && !string.IsNullOrEmpty(Model.q))
+    @if (string.IsNullOrWhiteSpace(Model.q))
+    {
+        <div class="alert alert-warning">Please enter a search term before searching.</div>
+    }
+    else if (Model.BugResults.Count == 0 && Model.EnvResults.Count == 0)
     {
         <div class="alert alert-info">No results found matching your query.</div>
     }

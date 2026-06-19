@@ -1,0 +1,151 @@
+﻿@page
+@model SWQA.Pages.AdminReporting.AdminReportingModel
+@{
+    ViewData["Title"] = "Admin Reporting";
+}
+
+<style>
+    .report-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 8px;
+        color: #ffffff !important;
+    }
+
+        .report-card:hover {
+            transform: translate(-2px, -5px);
+            box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .report-card h5, .report-card p, .report-card i {
+            color: #ffffff !important;
+        }
+
+    .palette-1 {
+        background-color: #3b82f6;
+    }
+
+    .palette-2 {
+        background-color: #8b5cf6;
+    }
+
+    .palette-3 {
+        background-color: #ec4899;
+    }
+
+    .palette-4 {
+        background-color: #f43f5e;
+    }
+
+    .palette-5 {
+        background-color: #f97316;
+    }
+
+    .palette-6 {
+        background-color: #14b8a6;
+    }
+</style>
+
+<div class="container-fluid px-4">
+    <div class="mt-4 mb-4">
+        <h1 class="mt-0">Admin Reports</h1>
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item active">Click any card below to instantly export the relevant report data as an XML file.</li>
+        </ol>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error!</strong> @Model.ErrorMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <form method="post" asp-page-handler="DownloadReport">
+                <input type="hidden" name="ReportType" value="FrequentErrors" />
+                <button type="submit" class="btn w-100 p-0 border-0 text-start">
+                    <div class="card report-card palette-1 shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-chart-bar me-2"></i>Frequent Errors</h5>
+                            <p class="card-text small">Groups bugs by error code to identify the most unstable modules.</p>
+                        </div>
+                    </div>
+                </button>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <form method="post" asp-page-handler="DownloadReport">
+                <input type="hidden" name="ReportType" value="LatestBugs" />
+                <button type="submit" class="btn w-100 p-0 border-0 text-start">
+                    <div class="card report-card palette-2 shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-history me-2"></i>Latest 10 Bugs</h5>
+                            <p class="card-text small">Exports the 10 most recently reported issues in the system.</p>
+                        </div>
+                    </div>
+                </button>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <form method="post" asp-page-handler="DownloadReport">
+                <input type="hidden" name="ReportType" value="ApiBugs" />
+                <button type="submit" class="btn w-100 p-0 border-0 text-start">
+                    <div class="card report-card palette-3 shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-network-wired me-2"></i>API Bugs</h5>
+                            <p class="card-text small">Filters the bug tracker to show only backend API related issues.</p>
+                        </div>
+                    </div>
+                </button>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <form method="post" asp-page-handler="DownloadReport">
+                <input type="hidden" name="ReportType" value="ActiveEnvs" />
+                <button type="submit" class="btn w-100 p-0 border-0 text-start">
+                    <div class="card report-card palette-4 shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-server me-2"></i>Active Envs</h5>
+                            <p class="card-text small">Lists all test environments currently marked as active and available.</p>
+                        </div>
+                    </div>
+                </button>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <form method="post" asp-page-handler="DownloadReport">
+                <input type="hidden" name="ReportType" value="OsDistribution" />
+                <button type="submit" class="btn w-100 p-0 border-0 text-start">
+                    <div class="card report-card palette-5 shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-desktop me-2"></i>OS Distribution</h5>
+                            <p class="card-text small">Groups environments by OS to analyze platform test coverage.</p>
+                        </div>
+                    </div>
+                </button>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <form method="post" asp-page-handler="DownloadReport">
+                <input type="hidden" name="ReportType" value="BugsByDate" />
+                <button type="submit" class="btn w-100 p-0 border-0 text-start">
+                    <div class="card report-card palette-6 shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-calendar-alt me-2"></i>Bugs By Date</h5>
+                            <p class="card-text small">Groups all reports by date to show bug discovery trends.</p>
+                        </div>
+                    </div>
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>
